@@ -36,7 +36,7 @@ public class UserResource {
 	@PostMapping
 	public ResponseEntity<User> insert(@RequestBody  User obj){
 		obj = service.insert(obj);
-		return ResponseEntity.ok().body(obj);
+		return ResponseEntity.created(null).body(obj);
         
 	}
  }

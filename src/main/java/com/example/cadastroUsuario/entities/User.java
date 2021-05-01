@@ -1,7 +1,6 @@
 package com.example.cadastroUsuario.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,8 +13,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-//import java.time.LocalDate;
-
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable{
@@ -27,13 +24,12 @@ public class User implements Serializable{
     private String nome;
     private String email;
     private Long cpf;
-  //@DateTimeFormat(pattern = "dd/MM/yyyy")
-  //private LocalDate data_nasc;
+  
     @Temporal(TemporalType.DATE)
     private Date data_nasc;
    
     @OneToMany(mappedBy = "user")
-    private List<Address> addresses  = new ArrayList();
+    private List<Address> addresses;
  
     public User() {
 	 
