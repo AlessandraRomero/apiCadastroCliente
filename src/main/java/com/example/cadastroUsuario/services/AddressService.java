@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.cadastroUsuario.entities.Address;
 import com.example.cadastroUsuario.entities.User;
 import com.example.cadastroUsuario.repositories.AddressRepository;
+import com.example.cadastroUsuario.services.Exception.ResourceNotFoundException;
 
 @Service
 public class AddressService {
@@ -22,7 +23,7 @@ public class AddressService {
 	
 	public Address findById(Long id) {
 		Optional<Address> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public Address insert(Address obj) {
