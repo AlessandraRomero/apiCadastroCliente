@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.cadastroUsuario.entities.Address;
 import com.example.cadastroUsuario.entities.User;
+import com.example.cadastroUsuario.repositories.UserRepository;
 import com.example.cadastroUsuario.services.AddressService;
 
 @RestController
@@ -34,8 +35,8 @@ public class AddressResource {
 	return ResponseEntity.ok().body(obj);
     }
 	
-	@PostMapping
-	public ResponseEntity<Address> insert(@RequestBody  Address obj){
+	@PostMapping("/{user_id}")
+	public ResponseEntity<Address> insert(@PathVariable (value = "user_id") Long user_id, @RequestBody  Address obj){
 		obj = service.insert(obj);
 		return ResponseEntity.created(null).body(obj);
         
