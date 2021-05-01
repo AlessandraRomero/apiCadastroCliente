@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "tb_address")
@@ -20,12 +21,19 @@ public class Address implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotNull
 	private String logradouro;
+	@NotNull
 	private int numero;
+	@NotNull
 	private String complemento;
+	@NotNull
 	private String bairro;
+	@NotNull
 	private String cidade;
+	@NotNull
 	private String estado;
+	@NotNull
 	private Long cep;
 	
 	@JsonIgnore

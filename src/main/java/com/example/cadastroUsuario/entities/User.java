@@ -15,6 +15,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import com.sun.istack.NotNull;
+
+
 @Entity
 @Table(name = "tb_user", uniqueConstraints={@UniqueConstraint(columnNames={"email", "cpf"})})
 public class User implements Serializable{
@@ -23,10 +26,13 @@ public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private String nome;
+    @NotNull
     private String email;
+    @NotNull
     private Long cpf;
-  
+    @NotNull
     @Temporal(TemporalType.DATE)
     private Date data_nasc;
    
