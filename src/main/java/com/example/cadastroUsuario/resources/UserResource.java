@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.cadastroUsuario.entities.User;
 import com.example.cadastroUsuario.services.UserService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 @RequestMapping(value = "/users")
 public class UserResource {
-
+	private Logger logger = LoggerFactory.getLogger(UserResource.class);
 	@Autowired
 	private UserService service;
 
@@ -38,7 +41,15 @@ public class UserResource {
 	@PostMapping
 	public ResponseEntity<User> insert(@RequestBody @Valid User obj){
 		obj = service.insert(obj);
+		logger.info(obj.toString());
 		return ResponseEntity.created(null).body(obj);
         
 	}
+
+	@GetMapping(value = "/{id}/address")
+	public ResponseEntity<User>findAddress(@PathVariable Long id) {
+	User obj = service.findById(id);
+	return ResponseEntity.ok().body(obj);
+    }
+	
  }

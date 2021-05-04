@@ -10,7 +10,4 @@ public class CadastroUsuarioApplication {
 		SpringApplication.run(CadastroUsuarioApplication.class, args);
 	}
 
-	
-	
-
 }

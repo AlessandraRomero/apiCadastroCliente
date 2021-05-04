@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
@@ -17,36 +19,46 @@ import com.sun.istack.NotNull;
 @Table(name = "tb_address")
 public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotNull
+
+	@Size(min = 1, max = 255, message = "O logradouro deve conter no minímo um caracter")
+	@NotBlank(message = "O campo logradouro não deve ser vazio")
 	private String logradouro;
+
 	@NotNull
 	private int numero;
-	@NotNull
+
 	private String complemento;
-	@NotNull
+
+	@Size(min = 5, max = 255, message = "O campo bairro deve conter no minímo 5 caracter")
+	@NotBlank(message = "O campo bairro não deve ser vazio")
 	private String bairro;
-	@NotNull
+
+	@Size(min = 2, max = 255, message = "O campo cidade deve conter no minímo dois caracter")
+	@NotBlank(message = "O campo cidade não deve ser vazio")
 	private String cidade;
-	@NotNull
+
+	@Size(min = 2, max = 255, message = "O campo estado deve conter no minímo dois caracter")
+	@NotBlank(message = "O campo estado não deve ser vazio")
 	private String estado;
+
 	@NotNull
 	private Long cep;
-	
+
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	public Address() {
-		
+
 	}
 
 	public Address(Long id, String logradouro, int numero, String complemento, String bairro, String cidade,
-			String estado, Long cep, User user) {
+			String estado, Long cep, User user_id) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
@@ -56,7 +68,7 @@ public class Address implements Serializable {
 		this.cidade = cidade;
 		this.estado = estado;
 		this.cep = cep;
-		this.user = user;
+		this.user = user_id;
 	}
 
 	public Long getId() {
@@ -127,7 +139,11 @@ public class Address implements Serializable {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(User user_id) {
+		this.user = user_id;
+	}
+
+	public void assignAddressToUser(User user) {
 		this.user = user;
 	}
 
@@ -154,6 +170,6 @@ public class Address implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
-	
+	}
+
 }

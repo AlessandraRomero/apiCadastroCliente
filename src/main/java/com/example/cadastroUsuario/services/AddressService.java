@@ -3,8 +3,12 @@ package com.example.cadastroUsuario.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.cadastroUsuario.entities.Address;
 import com.example.cadastroUsuario.entities.User;
@@ -15,7 +19,7 @@ import com.example.cadastroUsuario.services.Exception.ResourceNotFoundException;
 public class AddressService {
 	
 	@Autowired
-	private AddressRepository repository;
+	private  AddressRepository repository;
 	
 	public List<Address> findAll(){
 		return repository.findAll();
@@ -26,7 +30,7 @@ public class AddressService {
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
-	public Address insert(Address obj) {
+	public Address insert(@Valid Address obj) {
 		return repository.save(obj);
 	}
 }
